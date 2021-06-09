@@ -17,6 +17,7 @@ app.use("/posts", require("./routes/api/posts"));
 app.use("/auth", require("./routes/api/auth"));
 app.use("/profile", require("./routes/api/profile"));
 app.use("/users", require("./routes/api/users"));
+app.use("/test", require("./routes/api/test"));
 
 // CONNECT TO DB
 connectDB();

@@ -59,6 +59,7 @@ const ProfileSchema = mongoose.Schema({
   ],
   education: [
     {
+      _id: false,
       school: {
         type: String,
         required: true,
@@ -106,4 +107,5 @@ const ProfileSchema = mongoose.Schema({
   },
 });
 
-module.exports = Profile = mongoose.model("profile", ProfileSchema);
+const Profile = mongoose.model("profile", ProfileSchema);
+module.exports = Profile;

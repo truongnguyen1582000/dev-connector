@@ -1,22 +1,22 @@
 const express = require("express");
 var router = express.Router();
 const User = require("../../model/User");
-const { body, validationResult, check } = require("express-validator");
+const { validationResult, check } = require("express-validator");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 router.get("/", (req, res) => {
-  res.send("user route");
+  res.send("get user route");
 });
 
-// @route POST api/auth
-// @desc  authenticate user and get token for register
-// @access Public
+// @route   POST api/auth
+// @desc    authenticate user and get token for register
+// @access  Public
 router.post(
   "/",
   [
-    check("name", "Name is required !").not().isEmpty(),
+    check("name", "Name is required !").notEmpty(),
     check("email", "Please enter an valid email !").isEmail(),
     check("password", "Password must be at least 6 characters.").isLength({
       min: 6,
