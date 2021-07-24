@@ -1,23 +1,23 @@
-const express = require("express");
-const connectDB = require("./config/connectDB");
-require("dotenv").config();
+const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+const connectDB = require('./config/connectDB');
+require('dotenv').config();
 
 // permit to read req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.send("Hello Truong!");
+app.get('/', (req, res) => {
+  res.send('Hello Truong!');
 });
 
 // ROUTE
-app.use("/posts", require("./routes/api/posts"));
-app.use("/auth", require("./routes/api/auth"));
-app.use("/profile", require("./routes/api/profile"));
-app.use("/users", require("./routes/api/users"));
-app.use("/test", require("./routes/api/test"));
+app.use('/posts', require('./routes/api/posts'));
+app.use('/auth', require('./routes/api/auth'));
+app.use('/profile', require('./routes/api/profile'));
+app.use('/users', require('./routes/api/users'));
+app.use('/test', require('./routes/api/test'));
 
 // CONNECT TO DB
 connectDB();

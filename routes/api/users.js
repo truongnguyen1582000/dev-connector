@@ -1,24 +1,27 @@
-const express = require("express");
+const express = require('express');
 var router = express.Router();
-const User = require("../../model/User");
-const { validationResult, check } = require("express-validator");
-const gravatar = require("gravatar");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const User = require('../../model/User');
+const { validationResult, check } = require('express-validator');
+const gravatar = require('gravatar');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-router.get("/", (req, res) => {
-  res.send("get user route");
+router.get('/', (req, res) => {
+  res.send('get user route');
 });
 
 // @route   POST api/auth
 // @desc    authenticate user and get token for register
 // @access  Public
 router.post(
-  "/",
+  '/',
   [
-    check("name", "Name is required !").notEmpty(),
-    check("email", "Please enter an valid email !").isEmail(),
-    check("password", "Password must be at least 6 characters.").isLength({
+    check('name', 'Name is required !').notEmpty(),
+    check('email', 'Please enter an valid email !').isEmail(),
+    check(
+      'password',
+      'Password must be at least 6 characters.'
+    ).isLength({
       min: 6,
     }),
   ],
@@ -34,13 +37,15 @@ router.post(
       let user = await User.findOne({ email });
 
       if (user) {
-        res.status(400).json({ error: [{ msg: "User already exists !" }] });
+        res
+          .status(400)
+          .json({ error: [{ msg: 'User already exists !' }] });
       }
 
       const avatar = gravatar.url(email, {
-        s: "200",
-        r: "pg",
-        d: "mm",
+        s: '200',
+        r: 'pg',
+        d: 'mm',
       });
 
       user = new User({
@@ -68,7 +73,7 @@ router.post(
       res.json({ token });
     } catch (error) {
       console.log(error.message);
-      res.status(500).send("server error");
+      res.status(500).json({ err: error.message });
     }
   }
 );
